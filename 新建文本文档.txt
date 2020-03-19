@@ -1,0 +1,33 @@
+ desc dept
+
+spool c:\DEPT.txt
+select * from dept;
+spool off
+spool C:\DEPT.txt append
+
+
+select empno as 雇员编号,ename as 雇员姓名,sal as 薪水,comm as 红利 from emp;
+
+select * from emp 
+where to_char(hiredate,'mm')=2; 
+
+create table t(sno varchar2(20),name varchar2(20));
+insert into t values('201630702039','张子龙');
+drop table t;
+flashback table t to before drop;
+select * from t;
+
+create table stu(sno varchar2(20) ,name varchar2(20),sex varchar2(10));
+create sequence stuqqq start with 2016307020239;
+create or replace trigger stut
+before insert
+on stu
+for each row
+begin
+	select stuqqq.nextval
+	into :new.sno
+	from dual;
+end;
+/
+insert into stu values('201630702039','张子龙','男');
+insert into stu values( '1','AAA', '男');
